@@ -2,7 +2,7 @@
 package Recognizer;
 
 //import Capture.Capture;
-import Util.ConnectBanco;
+import Util.Connecor;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
@@ -45,7 +45,7 @@ public class Recognizer extends javax.swing.JFrame {
     
     
     //Utils
-    ConnectBanco connect = new ConnectBanco();
+    Connecor connect = new Connecor();
    
     public Recognizer() {
         initComponents();
@@ -63,10 +63,12 @@ public class Recognizer extends javax.swing.JFrame {
         label_photo = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         labelOffice = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         label_name = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Security System - Recognizer");
+        setUndecorated(true);
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -83,7 +85,15 @@ public class Recognizer extends javax.swing.JFrame {
         labelOffice.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labelOffice.setText("Office");
         labelOffice.setOpaque(true);
-        jPanel2.add(labelOffice, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 290, 50));
+        jPanel2.add(labelOffice, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 290, 50));
+
+        jButton1.setText("close");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 153, 80, 30));
 
         label_name.setBackground(new java.awt.Color(92, 96, 209));
         label_name.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
@@ -93,7 +103,7 @@ public class Recognizer extends javax.swing.JFrame {
         label_name.setOpaque(true);
         jPanel2.add(label_name, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 290, 50));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 330, 310, 140));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 330, 310, 190));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -108,13 +118,17 @@ public class Recognizer extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 508, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 532, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        setSize(new java.awt.Dimension(357, 528));
+        setSize(new java.awt.Dimension(341, 544));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        stopCamera();        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -148,6 +162,7 @@ public class Recognizer extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel labelOffice;

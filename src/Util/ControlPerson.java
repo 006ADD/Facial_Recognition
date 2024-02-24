@@ -23,18 +23,19 @@ import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableModel;*/
 
 public class ControlPerson {
-    ConnectBanco conecta = new ConnectBanco();
+    Connecor conecta = new Connecor();
 
     public void insert(ModelPerson mod) {
        try {
             conecta.conexao();
             PreparedStatement pst = conecta.conn.prepareStatement("INSERT INTO person (id, first_name, last_name, dob, office) VALUES (?, ?, ?, ?, ?)");
-            pst.setInt(1, mod.getId());
+           pst.setInt(1, mod.getId());
             pst.setString(2, mod.getFirst_name());
             pst.setString(3, mod.getLast_name());
             pst.setString(4, mod.getDob());
+            pst.setString(5, mod.getOffice());
             pst.executeUpdate();
-            System.out.println("Dados do(a): " + mod.getFirst_name() + " cadastrados");
+            System.out.println("Data from(a): " + mod.getFirst_name() + " registered");
             conecta.desconecta();
         } catch (SQLException ex) {
             System.out.println("Error: " + ex);

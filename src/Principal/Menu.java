@@ -5,6 +5,7 @@
 package Principal;
 
 import Capture.RegisterPerson;
+import Recognizer.Recognizer;
 
 
 public class Menu extends javax.swing.JFrame {
@@ -32,7 +33,6 @@ public class Menu extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         txt_title_menu = new javax.swing.JLabel();
 
@@ -47,13 +47,13 @@ public class Menu extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(84, 79, 231));
         jLabel2.setText("Choose a option");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 60, 180, 50));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 60, 180, 50));
 
         jLabel3.setBackground(new java.awt.Color(255, 255, 255));
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(211, 74, 248));
         jLabel3.setText("What do you wnat do you?");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 60, 300, 50));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 300, 50));
 
         jButton4.setBackground(new java.awt.Color(28, 160, 211));
         jButton4.setText("Recognize");
@@ -66,18 +66,6 @@ public class Menu extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 170, 160, 150));
-
-        jButton5.setBackground(new java.awt.Color(229, 221, 61));
-        jButton5.setText("Data");
-        jButton5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jButton5.setBorderPainted(false);
-        jButton5.setOpaque(true);
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 170, 160, 150));
 
         jButton6.setBackground(new java.awt.Color(184, 34, 225));
         jButton6.setText("Capture");
@@ -95,15 +83,16 @@ public class Menu extends javax.swing.JFrame {
         txt_title_menu.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         txt_title_menu.setText("Welcome, User!");
         txt_title_menu.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jPanel1.add(txt_title_menu, new org.netbeans.lib.awtextra.AbsoluteConstraints(9, 30, 720, 30));
+        jPanel1.add(txt_title_menu, new org.netbeans.lib.awtextra.AbsoluteConstraints(9, 30, 480, 30));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 740, 460));
 
-        setSize(new java.awt.Dimension(759, 469));
+        setSize(new java.awt.Dimension(546, 469));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        new Recognizer().setVisible(true);
         /*String user = txt_user.getText();
         String password = txt_pass.getText();
         if(user.equals("admin") && password.equals("admin")){
@@ -114,10 +103,6 @@ public class Menu extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Try again...");
         }*/
     }//GEN-LAST:event_jButton4ActionPerformed
-
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         new RegisterPerson().setVisible(true);
@@ -161,7 +146,6 @@ public class Menu extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
