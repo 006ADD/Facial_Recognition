@@ -22,7 +22,7 @@ public class Connecor {
     private final String driver = "com.mysql.cj.jdbc.Driver";
     private final String path = "jdbc:mysql://localhost:3306/Facial_recognition";
     private final String user = "root"; // Имя пользователя вашей MySQL базы данных
-    private final String pass =  "MySQL25.05.2023"; // Пароль вашей MySQL базы данных
+    private final String pass =  ""; // Пароль вашей MySQL базы данных
 
     
     public void conexao() {
