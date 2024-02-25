@@ -112,12 +112,11 @@ public class Capture extends javax.swing.JFrame {
         counterLabel.setOpaque(true);
         jPanel2.add(counterLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 10, 80, 40));
 
-        saveButton.setBackground(new java.awt.Color(60, 211, 209));
+        saveButton.setBackground(new java.awt.Color(30, 179, 177));
         saveButton.setText("cupture");
         saveButton.setContentAreaFilled(false);
         saveButton.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        saveButton.setOpaque(true);
-        jPanel2.add(saveButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 60, 100, 30));
+        jPanel2.add(saveButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 60, 100, 30));
 
         jButton1.setBackground(new java.awt.Color(255, 0, 0));
         jButton1.setText("close");
@@ -149,9 +148,7 @@ public class Capture extends javax.swing.JFrame {
         stopCamera();        // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+   
     public static void main(String args[]) {
        
         try {

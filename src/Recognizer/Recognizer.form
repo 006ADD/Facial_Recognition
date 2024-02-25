@@ -128,7 +128,7 @@
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="text" type="java.lang.String" value="First - Lastname"/>
+                <Property name="text" type="java.lang.String" value="Firstname"/>
                 <Property name="opaque" type="boolean" value="true"/>
               </Properties>
               <Constraints>

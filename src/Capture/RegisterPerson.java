@@ -189,9 +189,9 @@ public class RegisterPerson extends javax.swing.JFrame {
     private javax.swing.JTextField txt_office;
     // End of variables declaration//GEN-END:variables
     
-    private void showIdUser(){
+    /**private void showIdUser(){  старый код
         connect.conexao();
-        connect.executaSQL("SELECT * FROM person ORDER BY id DESC LIMIN");
+        connect.executaSQL("SELECT * FROM person ORDER BY id DESC LIMIT");
         try{
             txt_id_label.setText(String.valueOf((char) connect.rs.getInt("id")));
             int id = Integer.parseInt(txt_id_label.getText());
@@ -201,5 +201,19 @@ public class RegisterPerson extends javax.swing.JFrame {
         }catch(Exception e){
             
         }
+    }*/
+    
+    private void showIdUser(){
+        connect.connection();
+        connect.executeSQL("SELECT * FROM person ORDER BY id DESC LIMIT 1");
+        try {
+            if (connect.rs.next()) {
+                int id = connect.rs.getInt("id") + 1;
+                txt_id_label.setText(String.valueOf(id));
+            }
+        } catch(Exception e) {
+        // Обработка ошибок
     }
+}
+
 }

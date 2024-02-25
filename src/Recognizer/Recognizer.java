@@ -99,7 +99,7 @@ public class Recognizer extends javax.swing.JFrame {
         label_name.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         label_name.setForeground(new java.awt.Color(255, 255, 255));
         label_name.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        label_name.setText("First - Lastname");
+        label_name.setText("Firstname");
         label_name.setOpaque(true);
         jPanel2.add(label_name, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 290, 50));
 
@@ -243,10 +243,10 @@ public class Recognizer extends javax.swing.JFrame {
        SwingWorker worker = new SwingWorker(){
            @Override
            protected Object doInBackground() throws Exception {
-               connect.conexao();
+               connect.connection();
                try{
                    String SQL = "SELECT * FROM person WHERE id = " + String.valueOf(idPerson);
-                   connect.executaSQL(SQL);
+                   connect.executeSQL(SQL);
                    while(connect.rs.next()){
                        label_name.setText(connect.rs.getString("first_name") 
                                + " " + connect.rs.getString("last_name"));
@@ -265,45 +265,10 @@ public class Recognizer extends javax.swing.JFrame {
                 }catch(Exception e){
                     
                 }
-               connect.desconecta();
+               connect.disconnect();
                return null;
            }
        }; worker.execute();
-      /**new Thread() {
-            @Override
-            public void run() {
-                conecta.conexao();
-                try {
-                    conecta.executaSQL("SELECT * FROM person WHERE id = " + String.valueOf(idPerson));
-                    while (conecta.rs.next()) {
-                        firstNamePerson = conecta.rs.getString("first_name");
-                        jLabel10.setText("Hi, " + firstNamePerson + " " + conecta.rs.getString("last_name"));
-                        label_name.setText(conecta.rs.getString("first_name") + " " + conecta.rs.getString("last_name"));
-                        label_office.setText(conecta.rs.getString("office"));
-                        telefone = conecta.rs.getString("phone_number");
-                        label_phone.setText(telefone);
-                        sendMessage_btn.setText("Send Message to " + conecta.rs.getString("phone_number"));
-                        txt_id_label.setText(conecta.rs.getString("id"));
-
-                        //Social Info
-                        facebook = conecta.rs.getString("profile_facebook");
-                        insta = conecta.rs.getString("profile_instagram");
-                        linkedin = conecta.rs.getString("profile_linkedin");
-                        git = conecta.rs.getString("profile_github");
-
-                        Array ident = conecta.rs.getArray("first_name");
-                        String[] person = (String[]) ident.getArray();
-
-                        for (String person1 : person) {
-                            System.out.println(person1);
-                        }
-
-                    }
-                } catch (Exception e) {
-                }
-                conecta.desconecta();
-            }
-        }.start();*/
     }
 
     public void stopCamera() {

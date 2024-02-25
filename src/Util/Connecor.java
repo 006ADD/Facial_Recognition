@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package Util;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -19,6 +16,7 @@ public class Connecor {
     private final String user = "postgres";
     private final String pass = "";
     
+
   
     public void connection() {
         try {
