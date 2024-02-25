@@ -14,18 +14,13 @@ public class Connecor {
     public ResultSet rs;
     public Connection conn;
     
-  /**  private final String driver = "org.postgresql.Driver";
+    private final String driver = "org.postgresql.Driver";
     private final String path = "jdbc:postgresql://localhost:5432/Facial_recognition";
     private final String user = "postgres";
-    private final String pass = "";*/
+    private final String pass = "";
     
-    private final String driver = "com.mysql.cj.jdbc.Driver";
-    private final String path = "jdbc:mysql://localhost:3306/Facial_recognition";
-    private final String user = "root"; // Имя пользователя вашей MySQL базы данных
-    private final String pass =  "MySQL25.05.2023"; // Пароль вашей MySQL базы данных
-
-    
-    public void conexao() {
+  
+    public void connection() {
         try {
             System.setProperty("jdbc.Driver", driver);
             conn = DriverManager.getConnection(path, user, pass);
@@ -34,14 +29,14 @@ public class Connecor {
         }
     }
      
-    public void desconecta() {
+    public void disconnect() {
         try {
             conn.close();
         } catch (SQLException e) {
             System.out.println("Error: " + e);
         }
     }
-    public void executaSQL(String SQL) {
+    public void executeSQL(String SQL) {
         try {
             stm = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
             rs = stm.executeQuery(SQL);
@@ -52,6 +47,6 @@ public class Connecor {
     
     public static void main(String[] args){
         Connecor ds = new Connecor();
-        ds.conexao();
+        ds.connection();
     }
 }
