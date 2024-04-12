@@ -3,6 +3,8 @@ package Capture;
 import Util.Connecor;
 import Util.ControlPerson;
 import Util.ModelPerson;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class RegisterPerson extends javax.swing.JFrame {
 
@@ -26,10 +28,10 @@ public class RegisterPerson extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        txt_office = new javax.swing.JTextField();
+        txt_position = new javax.swing.JTextField();
         txt_first_name = new javax.swing.JTextField();
         txt_last_name = new javax.swing.JTextField();
-        txt_dob = new javax.swing.JFormattedTextField();
+        txt_yearOfBirth = new javax.swing.JFormattedTextField();
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -53,24 +55,24 @@ public class RegisterPerson extends javax.swing.JFrame {
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setText("Last Name");
+        jLabel2.setText("Фамилия");
         jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 30, -1, -1));
 
-        jLabel3.setText("Job");
+        jLabel3.setText("Год рождения");
         jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, -1, -1));
 
-        jLabel4.setText("Office");
+        jLabel4.setText("Должность ");
         jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 96, -1, 20));
 
-        jLabel5.setText("First Name");
+        jLabel5.setText("Имя");
         jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, -1, -1));
 
-        txt_office.addActionListener(new java.awt.event.ActionListener() {
+        txt_position.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_officeActionPerformed(evt);
+                txt_positionActionPerformed(evt);
             }
         });
-        jPanel3.add(txt_office, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 120, 160, -1));
+        jPanel3.add(txt_position, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 120, 160, -1));
 
         txt_first_name.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -87,11 +89,11 @@ public class RegisterPerson extends javax.swing.JFrame {
         jPanel3.add(txt_last_name, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 50, 160, -1));
 
         try {
-            txt_dob.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+            txt_yearOfBirth.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        jPanel3.add(txt_dob, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, 160, -1));
+        jPanel3.add(txt_yearOfBirth, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, 160, -1));
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 430, 180));
 
@@ -112,9 +114,9 @@ public class RegisterPerson extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txt_officeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_officeActionPerformed
+    private void txt_positionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_positionActionPerformed
 
-    }//GEN-LAST:event_txt_officeActionPerformed
+    }//GEN-LAST:event_txt_positionActionPerformed
 
     private void txt_first_nameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_first_nameActionPerformed
         // TODO add your handling code here:
@@ -125,14 +127,22 @@ public class RegisterPerson extends javax.swing.JFrame {
     }//GEN-LAST:event_txt_last_nameActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-            String fName = txt_first_name.getText();
-            String lName=txt_first_name.getText();
-            String dob =txt_dob.getText();
-            String office = txt_office.getText();
+            String firtsName = txt_first_name.getText();
+            String lastName=txt_last_name.getText();
+            String position = txt_position.getText();
+            String yearOfBirth =txt_yearOfBirth.getText();
             int id = Integer.parseInt(txt_id_label.getText().replace("ID ", ""));
-            System.out.println(id);
-            
-            new Capture(id, fName, lName,  office, dob).setVisible(true);
+            LocalDateTime registrationTime = LocalDateTime.now(); // Получаем текущее время
+    
+            // Выводим время регистрации в консоль
+            System.out.println("Registration Time: " + registrationTime);
+    
+            // Преобразуем время регистрации в строку в нужном формате, например, для вывода на экран
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+            String formattedRegistrationTime = registrationTime.format(formatter);
+            System.out.println("Formatted Registration Time: " + formattedRegistrationTime);    
+        
+           new Capture(id, firtsName, lastName, position, yearOfBirth, registrationTime).setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -182,11 +192,11 @@ public class RegisterPerson extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JFormattedTextField txt_dob;
     private javax.swing.JTextField txt_first_name;
     private javax.swing.JLabel txt_id_label;
     private javax.swing.JTextField txt_last_name;
-    private javax.swing.JTextField txt_office;
+    private javax.swing.JTextField txt_position;
+    private javax.swing.JFormattedTextField txt_yearOfBirth;
     // End of variables declaration//GEN-END:variables
     
     /**private void showIdUser(){  старый код
@@ -203,17 +213,30 @@ public class RegisterPerson extends javax.swing.JFrame {
         }
     }*/
     
-    private void showIdUser(){
+    private void showIdUser() {
         connect.connection();
         connect.executeSQL("SELECT * FROM person ORDER BY id DESC LIMIT 1");
-        try {
-            if (connect.rs.next()) {
-                int id = connect.rs.getInt("id") + 1;
-                txt_id_label.setText(String.valueOf(id));
-            }
-        } catch(Exception e) {
+            try {
+                if (connect.rs.next()) {
+                   int id = connect.rs.getInt("id") + 1;
+                    txt_id_label.setText("ID " + id);
+                    LocalDateTime registrationTime = LocalDateTime.now(); // Получаем текущее время
+                    // Сохраняем время регистрации в базе данных
+                    saveRegistrationTime(id, registrationTime);
+                } else {
+                    // Если таблица пустая, начинаем с id = 1
+                    txt_id_label.setText("ID 1");
+                    LocalDateTime registrationTime = LocalDateTime.now(); // Получаем текущее время
+                    // Сохраняем время регистрации в базе данных
+                    saveRegistrationTime(1, registrationTime);
+                }
+            } catch (Exception e) {
         // Обработка ошибок
+            }   
     }
-}
+    
+    private void saveRegistrationTime(int id, LocalDateTime registrationTime){
+        
+    }
 
 }

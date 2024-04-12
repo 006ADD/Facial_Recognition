@@ -24,22 +24,20 @@ import javax.swing.JFrame;
 public class BDViewer extends javax.swing.JDialog {
     //private KGradientPanel kGradientPanel1;
 int id;
-    Connecor conecta = new Connecor();
-    ControlPerson cod = new ControlPerson();
+    Connecor connect = new Connecor();
+    ControlPerson controlPerson = new ControlPerson();
 
-    public BDViewer(java.awt.Frame parent, boolean modal) throws SQLException {
-        super(parent, modal);
-        initComponents();
-        paint_table();
-        cod.preencherTabela("SELECT * FROM person ORDER BY id", tabela);
-    //public BDViewer() {
-        initComponents();
-    }
+   public BDViewer(java.awt.Frame parent, boolean modal) throws SQLException {
+    super(parent, modal);
+    initComponents(); // Вызов инициализации компонентов
+    paint_table();
+    controlPerson.filltable("SELECT * FROM person ORDER BY id", table);
+}
     
     public BDViewer() throws SQLException{
         initComponents();
         paint_table();
-        cod.preencherTabela("SELECT * FROM person ORDER BY id", tabela);
+        controlPerson.filltable("SELECT * FROM person ORDER BY id", table);
     }
 
     /**
@@ -54,46 +52,28 @@ int id;
         jPanel1 = new javax.swing.JPanel();
         txt_search = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tabela = new javax.swing.JTable();
+        table = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        kGradientPanel1 = new keeptoo.KGradientPanel();
-        txt_github = new javax.swing.JTextField();
-        kGradientPanel2 = new keeptoo.KGradientPanel();
-        txt_linkedin = new javax.swing.JTextField();
-        kGradientPanel3 = new keeptoo.KGradientPanel();
-        txt_insta = new javax.swing.JTextField();
-        kGradientPanel4 = new keeptoo.KGradientPanel();
-        txt_fb = new javax.swing.JTextField();
-        kGradientPanel5 = new keeptoo.KGradientPanel();
-        txt_phone = new javax.swing.JTextField();
-        kGradientPanel6 = new keeptoo.KGradientPanel();
-        txt_office = new javax.swing.JTextField();
-        kGradientPanel7 = new keeptoo.KGradientPanel();
-        txt_name = new javax.swing.JTextField();
-        sendMessage_btn = new keeptoo.KButton();
-        kGradientPanel8 = new keeptoo.KGradientPanel();
-        txt_lastname = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
+        txt_name = new javax.swing.JTextField();
+        txt_lastname = new javax.swing.JTextField();
+        txt_office = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
         txt_id_label = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        sendMessage_btn = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jPanel1.setBackground(new java.awt.Color(102, 0, 102));
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txt_search.setForeground(new java.awt.Color(169, 169, 169));
-        txt_search.setText("Search here...");
+        txt_search.setText("Поиск");
         txt_search.setBorder(null);
         txt_search.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -101,6 +81,11 @@ int id;
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txt_searchFocusLost(evt);
+            }
+        });
+        txt_search.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_searchActionPerformed(evt);
             }
         });
         txt_search.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -112,7 +97,7 @@ int id;
 
         jScrollPane1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 240, 240)));
 
-        tabela.setModel(new javax.swing.table.DefaultTableModel(
+        table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -190,21 +175,21 @@ int id;
 
             }
         ));
-        tabela.setFillsViewportHeight(true);
-        tabela.addFocusListener(new java.awt.event.FocusAdapter() {
+        table.setFillsViewportHeight(true);
+        table.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                tabelaFocusGained(evt);
+                tableFocusGained(evt);
             }
         });
-        tabela.addMouseListener(new java.awt.event.MouseAdapter() {
+        table.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tabelaMouseClicked(evt);
+                tableMouseClicked(evt);
             }
             public void mouseReleased(java.awt.event.MouseEvent evt) {
-                tabelaMouseReleased(evt);
+                tableMouseReleased(evt);
             }
         });
-        jScrollPane1.setViewportView(tabela);
+        jScrollPane1.setViewportView(table);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 390, 380));
 
@@ -212,138 +197,36 @@ int id;
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setForeground(new java.awt.Color(118, 118, 118));
-        jLabel2.setText("Last Name");
+        jLabel2.setText("Фамилия");
         jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 10, -1, -1));
 
         jLabel3.setForeground(new java.awt.Color(118, 118, 118));
-        jLabel3.setText("Office");
+        jLabel3.setText("Должность");
         jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, -1, -1));
 
-        jLabel4.setForeground(new java.awt.Color(118, 118, 118));
-        jLabel4.setText("Facebook");
-        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, -1, -1));
-
-        jLabel5.setForeground(new java.awt.Color(118, 118, 118));
-        jLabel5.setText("Instagram");
-        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 130, -1, -1));
-
-        jLabel6.setForeground(new java.awt.Color(118, 118, 118));
-        jLabel6.setText("Linkedin");
-        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, -1, -1));
-
-        jLabel7.setForeground(new java.awt.Color(118, 118, 118));
-        jLabel7.setText("Github");
-        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 190, -1, -1));
-
-        jLabel8.setForeground(new java.awt.Color(118, 118, 118));
-        jLabel8.setText("Phone");
-        jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 70, -1, -1));
-
-        kGradientPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        kGradientPanel1.setkFillBackground(false);
-        kGradientPanel1.setkStartColor(new java.awt.Color(0, 123, 255));
-        kGradientPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        txt_github.setBorder(null);
-        kGradientPanel1.add(txt_github, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 160, 30));
-
-        jPanel2.add(kGradientPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 210, 180, 30));
-
-        kGradientPanel2.setBackground(new java.awt.Color(255, 255, 255));
-        kGradientPanel2.setkFillBackground(false);
-        kGradientPanel2.setkStartColor(new java.awt.Color(0, 123, 255));
-        kGradientPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        txt_linkedin.setBorder(null);
-        kGradientPanel2.add(txt_linkedin, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 160, 30));
-
-        jPanel2.add(kGradientPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, 180, 30));
-
-        kGradientPanel3.setBackground(new java.awt.Color(255, 255, 255));
-        kGradientPanel3.setkFillBackground(false);
-        kGradientPanel3.setkStartColor(new java.awt.Color(0, 123, 255));
-        kGradientPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        txt_insta.setBorder(null);
-        kGradientPanel3.add(txt_insta, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 160, 30));
-
-        jPanel2.add(kGradientPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 150, 180, 30));
-
-        kGradientPanel4.setBackground(new java.awt.Color(255, 255, 255));
-        kGradientPanel4.setkFillBackground(false);
-        kGradientPanel4.setkStartColor(new java.awt.Color(0, 123, 255));
-        kGradientPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        txt_fb.setBorder(null);
-        kGradientPanel4.add(txt_fb, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 160, 30));
-
-        jPanel2.add(kGradientPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 180, 30));
-
-        kGradientPanel5.setBackground(new java.awt.Color(255, 255, 255));
-        kGradientPanel5.setkFillBackground(false);
-        kGradientPanel5.setkStartColor(new java.awt.Color(0, 123, 255));
-        kGradientPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        txt_phone.setBorder(null);
-        kGradientPanel5.add(txt_phone, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 160, 30));
-
-        jPanel2.add(kGradientPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 90, 180, 30));
-
-        kGradientPanel6.setBackground(new java.awt.Color(255, 255, 255));
-        kGradientPanel6.setkFillBackground(false);
-        kGradientPanel6.setkStartColor(new java.awt.Color(0, 123, 255));
-        kGradientPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        txt_office.setBorder(null);
-        kGradientPanel6.add(txt_office, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 160, 30));
-
-        jPanel2.add(kGradientPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 180, 30));
-
-        kGradientPanel7.setBackground(new java.awt.Color(255, 255, 255));
-        kGradientPanel7.setkFillBackground(false);
-        kGradientPanel7.setkStartColor(new java.awt.Color(0, 123, 255));
-        kGradientPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        txt_name.setBorder(null);
-        kGradientPanel7.add(txt_name, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 160, 30));
-
-        jPanel2.add(kGradientPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 180, 30));
-
-        sendMessage_btn.setText("Save");
-        sendMessage_btn.setkAllowTab(false);
-        sendMessage_btn.setkEndColor(new java.awt.Color(118, 195, 118));
-        sendMessage_btn.setkHoverEndColor(new java.awt.Color(22, 92, 22));
-        sendMessage_btn.setkHoverForeGround(new java.awt.Color(255, 255, 255));
-        sendMessage_btn.setkHoverStartColor(new java.awt.Color(80, 142, 80));
-        sendMessage_btn.setkPressedColor(new java.awt.Color(28, 72, 28));
-        sendMessage_btn.setkStartColor(new java.awt.Color(87, 167, 87));
-        sendMessage_btn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                sendMessage_btnActionPerformed(evt);
-            }
-        });
-        jPanel2.add(sendMessage_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 270, 390, 30));
-        sendMessage_btn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-
-        kGradientPanel8.setBackground(new java.awt.Color(255, 255, 255));
-        kGradientPanel8.setkFillBackground(false);
-        kGradientPanel8.setkStartColor(new java.awt.Color(0, 123, 255));
-        kGradientPanel8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        txt_lastname.setBorder(null);
-        kGradientPanel8.add(txt_lastname, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 160, 30));
-
-        jPanel2.add(kGradientPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 30, 180, 30));
-
         jLabel9.setForeground(new java.awt.Color(118, 118, 118));
-        jLabel9.setText("First Name");
+        jLabel9.setText("Имя");
         jPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 130, 390, 310));
+        txt_name.setBorder(null);
+        jPanel2.add(txt_name, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 150, 30));
+
+        txt_lastname.setBorder(null);
+        jPanel2.add(txt_lastname, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 30, 160, 30));
+
+        txt_office.setBorder(null);
+        txt_office.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_officeActionPerformed(evt);
+            }
+        });
+        jPanel2.add(txt_office, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 350, 30));
+
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 130, 390, 190));
 
         jLabel12.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(135, 135, 136));
-        jLabel12.setText("Info");
+        jLabel12.setText("Информация");
         jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 100, -1, -1));
 
         jPanel3.setBackground(new java.awt.Color(57, 129, 215));
@@ -353,7 +236,6 @@ int id;
         jLabel14.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(255, 255, 255));
         jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel14.setText("ID Face");
         jPanel3.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 80, 40));
 
         txt_id_label.setBackground(new java.awt.Color(132, 242, 145));
@@ -374,7 +256,31 @@ int id;
         });
         jPanel3.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 0, 30, 40));
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 0, 680, 40));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 0, 680, 40));
+
+        sendMessage_btn.setText("сохранить");
+        sendMessage_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sendMessage_btnActionPerformed(evt);
+            }
+        });
+        jPanel1.add(sendMessage_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 340, 130, 50));
+
+        jButton2.setText("удалить");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 340, 110, 40));
+
+        jButton3.setText("сох2");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 400, 160, 50));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -389,7 +295,7 @@ int id;
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 485, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -407,53 +313,71 @@ int id;
 
     private void txt_searchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_searchKeyReleased
         try {
-            cod.preencherTabela("SELECT * FROM person WHERE first_name LIKE '%" + txt_search.getText() + "%' OR last_name LIKE '%" + txt_search.getText() + "%' OR office LIKE '%" + txt_search.getText() + "%' ORDER BY id", tabela);
+            controlPerson.filltable("SELECT * FROM person WHERE first_name LIKE '%" + txt_search.getText() + "%' OR last_name LIKE '%" + txt_search.getText() + "%' OR office LIKE '%" + txt_search.getText() + "%' ORDER BY id", table);
         } catch (SQLException ex) {
             Logger.getLogger(BDViewer.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_txt_searchKeyReleased
 
-    private void tabelaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tabelaFocusGained
+    private void tableFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tableFocusGained
         txt_search.setForeground(new java.awt.Color(169, 169, 169));
         txt_search.setText("Search here...");
-    }//GEN-LAST:event_tabelaFocusGained
+    }//GEN-LAST:event_tableFocusGained
 
-    private void tabelaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaMouseClicked
-        conecta.connection();
+    private void tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseClicked
+        connect.connection();
         try {
-            String nome = "" + tabela.getValueAt(tabela.getSelectedRow(), 1);
-            conecta.executeSQL("SELECT * FROM person WHERE id = '" + nome + "'");
-            conecta.rs.first();
-            id = conecta.rs.getInt("id");
-            txt_id_label.setText(String.valueOf(id));
-            txt_name.setText(String.valueOf(conecta.rs.getString("first_name")));
-            txt_lastname.setText(String.valueOf(conecta.rs.getString("last_name")));
-            txt_office.setText(String.valueOf(conecta.rs.getString("office")));
-            txt_phone.setText(String.valueOf(conecta.rs.getString("phone_number")));
-        } catch (SQLException s) {
-            //JOptionPane.showMessageDialog(rootPane, "Erro ao Selecionar os Dados!\nErro:" + s);
-        }
-        conecta.disconnect();
-    }//GEN-LAST:event_tabelaMouseClicked
+            String nome = "" + table.getValueAt(table.getSelectedRow(), 1);
+connect.executeSQL("SELECT * FROM person WHERE id = '" + nome + "'");
+connect.rs.first();
+id = connect.rs.getInt("id");
+txt_id_label.setText(String.valueOf(id));
+txt_name.setText(String.valueOf(connect.rs.getString("first_name")));
+txt_lastname.setText(String.valueOf(connect.rs.getString("last_name")));
+txt_office.setText(String.valueOf(connect.rs.getString("office")));
 
-    private void tabelaMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaMouseReleased
+
+        } catch (SQLException s) {
+            //JOptionPane.showMessageDialog(rootPane, "" + s);
+        }
+        connect.disconnect();
+    }//GEN-LAST:event_tableMouseClicked
+
+    private void tableMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseReleased
        /** if (evt.isPopupTrigger()) {//Se o mouse foi clicado com o botão de PopupMenu default do sistema operacional em uso
             jPopupMenu1.show(tabela, evt.getX(), evt.getY()); //p é o JPopupMenu, t é a tabela, e.getX() recupera a posição horizontal do mouse e e.getY() recupera a posição vertical.
         }*/
-    }//GEN-LAST:event_tabelaMouseReleased
-
-    private void sendMessage_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendMessage_btnActionPerformed
-        ModelPerson mod = new ModelPerson();
-        mod.setId(id);
-        mod.setFirst_name(txt_lastname.getText());
-        mod.setDob(txt_phone.getText());
-        mod.setOffice(txt_office.getText());
-        cod.update(mod, id);
-    }//GEN-LAST:event_sendMessage_btnActionPerformed
+    }//GEN-LAST:event_tableMouseReleased
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void sendMessage_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendMessage_btnActionPerformed
+               
+    }//GEN-LAST:event_sendMessage_btnActionPerformed
+
+    private void txt_officeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_officeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_officeActionPerformed
+
+    private void txt_searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_searchActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_searchActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+         ModelPerson mod = new ModelPerson();
+        mod.setId(id);
+        mod.setFirstName(txt_name.getText());
+        mod.setLastName(txt_lastname.getText());
+        //mod.setDob(txt_phone.getText());
+        mod.setPosition(txt_office.getText());
+        controlPerson.update(mod, id);
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -502,47 +426,31 @@ int id;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private keeptoo.KGradientPanel kGradientPanel1;
-    private keeptoo.KGradientPanel kGradientPanel2;
-    private keeptoo.KGradientPanel kGradientPanel3;
-    private keeptoo.KGradientPanel kGradientPanel4;
-    private keeptoo.KGradientPanel kGradientPanel5;
-    private keeptoo.KGradientPanel kGradientPanel6;
-    private keeptoo.KGradientPanel kGradientPanel7;
-    private keeptoo.KGradientPanel kGradientPanel8;
-    private keeptoo.KButton sendMessage_btn;
-    private javax.swing.JTable tabela;
-    private javax.swing.JTextField txt_fb;
-    private javax.swing.JTextField txt_github;
+    private javax.swing.JButton sendMessage_btn;
+    private javax.swing.JTable table;
     private javax.swing.JLabel txt_id_label;
-    private javax.swing.JTextField txt_insta;
     private javax.swing.JTextField txt_lastname;
-    private javax.swing.JTextField txt_linkedin;
     private javax.swing.JTextField txt_name;
     private javax.swing.JTextField txt_office;
-    private javax.swing.JTextField txt_phone;
     private javax.swing.JTextField txt_search;
     // End of variables declaration//GEN-END:variables
  private void paint_table() {
         jScrollPane1.getViewport().setBackground(Color.WHITE);
-        tabela.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 12));
-        tabela.getTableHeader().setOpaque(false);
-        tabela.getTableHeader().setBackground(new Color(60, 127, 177));
-        tabela.getTableHeader().setForeground(new Color(255, 255, 255));
-        tabela.setRowHeight(50);
+        table.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 12));
+        table.getTableHeader().setOpaque(false);
+        table.getTableHeader().setBackground(new Color(60, 127, 177));
+        table.getTableHeader().setForeground(new Color(255, 255, 255));
+        table.setRowHeight(50);
     }
 }

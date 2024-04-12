@@ -1,4 +1,3 @@
-
 package Capture;
 
 import Util.Connecor;
@@ -11,6 +10,7 @@ import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.nio.IntBuffer;
+import java.time.LocalDateTime;
 import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 
@@ -48,8 +48,13 @@ public class Capture extends javax.swing.JFrame {
     RectVector delectedFaces = new RectVector();
     
     //Vars
-    String root, firstNamePerson, lasrNamePerson, officePerson, dobPerson;
-    int numSamples = 25, sample=1, idPerson;
+    private String root;
+    private String firstNamePerson;
+    private String lastNamePerson; 
+    private String positionPerson; 
+    private String yearOfBirthPerson;
+    private LocalDateTime registrationTime;
+    private int numSamples = 25, sample=1, idPerson;
     
     
     //Utils
@@ -58,14 +63,16 @@ public class Capture extends javax.swing.JFrame {
     public Capture(){}
     
     
-    public Capture(int id, String firstName, String lastName, String office, String dob) {
+    public Capture(int id, String firstName, String lastName, String position, String yearOfBirth, LocalDateTime registrationTime)  {
         initComponents();
         
-        idPerson = id;
-        firstNamePerson = firstName;
-        lasrNamePerson = lastName;
-        officePerson=office;
-        dobPerson=dob;
+        this.idPerson = id;
+        this.firstNamePerson = firstName;
+        this.lastNamePerson = lastName;
+        this.positionPerson=position;
+        this.yearOfBirthPerson=yearOfBirth;
+        this.registrationTime = registrationTime;
+        
         startCamera();
     }
 
@@ -95,7 +102,7 @@ public class Capture extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(153, 153, 153));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Capture 25 snapshots");
+        jLabel1.setText("Сделайте 25  снимков");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 330, 40));
 
         jLabel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(200, 200, 200)));
@@ -113,13 +120,13 @@ public class Capture extends javax.swing.JFrame {
         jPanel2.add(counterLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 10, 80, 40));
 
         saveButton.setBackground(new java.awt.Color(30, 179, 177));
-        saveButton.setText("cupture");
+        saveButton.setText("Снимать");
         saveButton.setContentAreaFilled(false);
         saveButton.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jPanel2.add(saveButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 60, 100, 30));
 
         jButton1.setBackground(new java.awt.Color(255, 0, 0));
-        jButton1.setText("close");
+        jButton1.setText("Закрыть");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -188,18 +195,18 @@ public class Capture extends javax.swing.JFrame {
                     try {
                         if (webSource.grab()) {
                             webSource.retrieve(cameraImage);
-                            Graphics g = jLabel2.getGraphics(); //mostra a imagem no jlabel
-                            Mat imageColor = new Mat(); //imagem colorida
+                            Graphics g = jLabel2.getGraphics(); 
+                            Mat imageColor = new Mat(); 
                             imageColor = cameraImage;
 
-                            Mat imageGray = new Mat(); //imagem pb
+                            Mat imageGray = new Mat(); 
                             cvtColor(imageColor, imageGray, COLOR_BGRA2GRAY);
 //                            flip(cameraImage, cameraImage, +1);
 
-                            RectVector detectedFaces = new RectVector(); //face detectada
+                            RectVector detectedFaces = new RectVector(); 
                             cascade.detectMultiScale(imageColor, detectedFaces, 1.1, 1, 1, new Size(150, 150), new Size(500, 500));
 
-                            for (int i = 0; i < detectedFaces.size(); i++) { //repetição pra encontrar as faces
+                            for (int i = 0; i < detectedFaces.size(); i++) { 
                                 Rect dadosFace = detectedFaces.get(0);
 
                                 rectangle(imageColor, dadosFace, new Scalar(255, 255, 0, 2), 3, 0, 0);
@@ -284,10 +291,12 @@ public class Capture extends javax.swing.JFrame {
         ModelPerson mod = new ModelPerson();
 
         mod.setId(idPerson);
-        mod.setFirst_name(firstNamePerson);
-        mod.setLast_name(lasrNamePerson);
-        mod.setDob(dobPerson);
-        mod.setOffice(officePerson);
+        mod.setFirstName(firstNamePerson);
+        mod.setLastName(lastNamePerson);
+        mod.setYearOfBirth(yearOfBirthPerson);
+        mod.setPosition(positionPerson);
+        mod.setRegistrationTime(LocalDateTime.now()); // Получаем текущее время
+        mod.setRegistrationTime(registrationTime); 
         cod.insert(mod);
     }
     

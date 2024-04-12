@@ -40,7 +40,7 @@ public class Recognizer extends javax.swing.JFrame {
     RectVector delectedFaces = new RectVector();
     
     //Vars
-    String root, firstNamePerson, lasrNamePerson, officePerson, dobPerson;
+    String root, firstName, lastName, position, yearOfBirth;
     int idPerson;
     
     
@@ -83,11 +83,11 @@ public class Recognizer extends javax.swing.JFrame {
         labelOffice.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         labelOffice.setForeground(new java.awt.Color(255, 255, 255));
         labelOffice.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelOffice.setText("Office");
+        labelOffice.setText("должность");
         labelOffice.setOpaque(true);
         jPanel2.add(labelOffice, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 290, 50));
 
-        jButton1.setText("close");
+        jButton1.setText("Закрыть");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -99,7 +99,7 @@ public class Recognizer extends javax.swing.JFrame {
         label_name.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         label_name.setForeground(new java.awt.Color(255, 255, 255));
         label_name.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        label_name.setText("Firstname");
+        label_name.setText("Имя");
         label_name.setOpaque(true);
         jPanel2.add(label_name, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 290, 50));
 
@@ -200,7 +200,7 @@ public class Recognizer extends javax.swing.JFrame {
                                 recognizer.predict(faceCapturada, rotulo, confidence);
                                 int prediction = rotulo.get(0);
                                 String nome;
-                                nome = firstNamePerson;
+                                nome = firstName;
 
                                 if (prediction == -1) {
                                     /**rectangle(cameraImage, dadosFace, new Scalar(0, 0, 255, 3), 3, 0, 0);
@@ -248,8 +248,8 @@ public class Recognizer extends javax.swing.JFrame {
                    String SQL = "SELECT * FROM person WHERE id = " + String.valueOf(idPerson);
                    connect.executeSQL(SQL);
                    while(connect.rs.next()){
-                       label_name.setText(connect.rs.getString("first_name") 
-                               + " " + connect.rs.getString("last_name"));
+                       label_name.setText(connect.rs.getString("first_name")); 
+                               //+ " " + connect.rs.getString("last_name"));
                        labelOffice.setText(connect.rs.getString("office"));
                        
                        System.out.println("Person: "+ connect.rs.getString("id"));

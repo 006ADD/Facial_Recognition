@@ -4,23 +4,27 @@
  */
 package Util;
 
+import java.time.LocalDateTime;
+
 /**
  *
  * @author User
  */
 public class ModelPerson {
     private int id;
-    private String first_name, last_name, dob, office, facebook, instagram, linkedin, github, image, date;
+    private String firstName, lastName, yearOfBirth, position,  image, date;
+    private LocalDateTime registrationTime;
 
     public ModelPerson() {
     }
 
-    public ModelPerson(int id, String first_name, String last_name, String dob, String office) {
+    public ModelPerson(int id, String firstName, String lastName, String position, String yearOfBirth, LocalDateTime registrationTime) {
         this.id = id;
-        this.first_name = first_name;
-        this.last_name = last_name;
-        this.dob = dob;
-        this.office = office;      
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.position = position; 
+        this.yearOfBirth = yearOfBirth;     
+        this.registrationTime=registrationTime;
     }
 
     public int getId() {
@@ -31,35 +35,42 @@ public class ModelPerson {
         this.id = id;
     }
 
-    public String getFirst_name() {
-        return first_name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setFirst_name(String first_name) {
-        this.first_name = first_name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getLast_name() {
-        return last_name;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setLast_name(String last_name) {
-        this.last_name = last_name;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
-    public String getDob() {
-        return dob;
+    public String getYearOfBirth() {
+        return yearOfBirth;
     }
 
-    public void setDob(String dob) {
-        this.dob = dob;
+    public void setYearOfBirth(String yearOfBirth) {
+        this.yearOfBirth = yearOfBirth;
     }
 
-    public String getOffice() {
-        return office;
+    public String getPosition() {
+        return position;
     }
 
-    public void setOffice(String office) {
-        this.office = office;
+    public void setPosition(String position) {
+        this.position = position;
+    }
+    public LocalDateTime getRegistrationTime() {
+        return registrationTime;
+    }
+
+    public void setRegistrationTime(LocalDateTime registrationTime) {
+        this.registrationTime = registrationTime;
     }
 }

@@ -6,6 +6,10 @@ package Principal;
 
 import Capture.RegisterPerson;
 import Recognizer.Recognizer;
+import DeanOffice.BDViewer;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class Menu extends javax.swing.JFrame {
@@ -31,10 +35,10 @@ public class Menu extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         jButton4 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         txt_title_menu = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Security System - Menu");
@@ -46,17 +50,11 @@ public class Menu extends javax.swing.JFrame {
         jLabel2.setBackground(new java.awt.Color(255, 255, 255));
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(84, 79, 231));
-        jLabel2.setText("Choose a option");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 60, 180, 50));
-
-        jLabel3.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(211, 74, 248));
-        jLabel3.setText("What do you wnat do you?");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 300, 50));
+        jLabel2.setText("Выберите вариант");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 70, 180, 50));
 
         jButton4.setBackground(new java.awt.Color(28, 160, 211));
-        jButton4.setText("Recognize");
+        jButton4.setText("Распознавать");
         jButton4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jButton4.setBorderPainted(false);
         jButton4.setOpaque(true);
@@ -68,7 +66,7 @@ public class Menu extends javax.swing.JFrame {
         jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 170, 160, 150));
 
         jButton6.setBackground(new java.awt.Color(184, 34, 225));
-        jButton6.setText("Capture");
+        jButton6.setText("Улавливать ");
         jButton6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jButton6.setBorderPainted(false);
         jButton6.setOpaque(true);
@@ -81,13 +79,21 @@ public class Menu extends javax.swing.JFrame {
 
         txt_title_menu.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         txt_title_menu.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        txt_title_menu.setText("Welcome, User!");
+        txt_title_menu.setText("Добропожаловать пользватель!");
         txt_title_menu.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jPanel1.add(txt_title_menu, new org.netbeans.lib.awtextra.AbsoluteConstraints(9, 30, 480, 30));
 
+        jButton1.setText("jButton1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 170, 190, 140));
+
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 740, 460));
 
-        setSize(new java.awt.Dimension(546, 469));
+        setSize(new java.awt.Dimension(757, 469));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -107,6 +113,14 @@ public class Menu extends javax.swing.JFrame {
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         new RegisterPerson().setVisible(true);
     }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        try {
+            new BDViewer().setVisible(true);        // TODO add your handling code here:
+        } catch (SQLException ex) {
+            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -145,10 +159,10 @@ public class Menu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel txt_title_menu;
     // End of variables declaration//GEN-END:variables
