@@ -59,15 +59,17 @@ int id;
         jLabel9 = new javax.swing.JLabel();
         txt_name = new javax.swing.JTextField();
         txt_lastname = new javax.swing.JTextField();
-        txt_office = new javax.swing.JTextField();
+        txt_position = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        txt_yearOfBirth = new javax.swing.JTextField();
+        txt_registrationTime = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        jLabel14 = new javax.swing.JLabel();
-        txt_id_label = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        sendMessage_btn = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        txt_id_label = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -205,46 +207,82 @@ int id;
         jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, -1, -1));
 
         jLabel9.setForeground(new java.awt.Color(118, 118, 118));
-        jLabel9.setText("Имя");
-        jPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+        jLabel9.setText("Время регистрации");
+        jPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 130, -1, -1));
 
         txt_name.setBorder(null);
+        txt_name.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_nameActionPerformed(evt);
+            }
+        });
         jPanel2.add(txt_name, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 150, 30));
 
         txt_lastname.setBorder(null);
         jPanel2.add(txt_lastname, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 30, 160, 30));
 
-        txt_office.setBorder(null);
-        txt_office.addActionListener(new java.awt.event.ActionListener() {
+        txt_position.setBorder(null);
+        txt_position.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_officeActionPerformed(evt);
+                txt_positionActionPerformed(evt);
             }
         });
-        jPanel2.add(txt_office, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 350, 30));
+        jPanel2.add(txt_position, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 350, 30));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 130, 390, 190));
+        jLabel10.setForeground(new java.awt.Color(118, 118, 118));
+        jLabel10.setText("Имя");
+        jPanel2.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+
+        txt_yearOfBirth.setBorder(null);
+        txt_yearOfBirth.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_yearOfBirthActionPerformed(evt);
+            }
+        });
+        jPanel2.add(txt_yearOfBirth, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 150, 30));
+
+        txt_registrationTime.setBorder(null);
+        jPanel2.add(txt_registrationTime, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 150, 170, 30));
+
+        jLabel11.setForeground(new java.awt.Color(118, 118, 118));
+        jLabel11.setText("Дата рождения");
+        jPanel2.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, -1, -1));
+
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 140, 390, 250));
 
         jLabel12.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(135, 135, 136));
         jLabel12.setText("Информация");
-        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 100, -1, -1));
+        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 90, -1, -1));
 
         jPanel3.setBackground(new java.awt.Color(57, 129, 215));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 0, 680, 40));
 
-        jLabel14.setBackground(new java.awt.Color(90, 68, 193));
-        jLabel14.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jPanel3.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 80, 40));
+        jButton2.setText("удалить");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 400, 110, 40));
+
+        jButton3.setText("сох2");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 400, 110, 40));
 
         txt_id_label.setBackground(new java.awt.Color(132, 242, 145));
         txt_id_label.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        txt_id_label.setForeground(new java.awt.Color(255, 255, 255));
+        txt_id_label.setForeground(new java.awt.Color(0, 0, 51));
         txt_id_label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jPanel3.add(txt_id_label, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 0, 40, 40));
+        jPanel1.add(txt_id_label, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 90, 40, 40));
 
         jButton1.setBackground(new java.awt.Color(213, 83, 83));
+        jButton1.setText("close");
         jButton1.setToolTipText("Close");
         jButton1.setContentAreaFilled(false);
         jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -254,33 +292,7 @@ int id;
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel3.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 0, 30, 40));
-
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 0, 680, 40));
-
-        sendMessage_btn.setText("сохранить");
-        sendMessage_btn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                sendMessage_btnActionPerformed(evt);
-            }
-        });
-        jPanel1.add(sendMessage_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 340, 130, 50));
-
-        jButton2.setText("удалить");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 340, 110, 40));
-
-        jButton3.setText("сох2");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 400, 160, 50));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 0, 70, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -328,13 +340,15 @@ int id;
         connect.connection();
         try {
             String nome = "" + table.getValueAt(table.getSelectedRow(), 1);
-connect.executeSQL("SELECT * FROM person WHERE id = '" + nome + "'");
-connect.rs.first();
-id = connect.rs.getInt("id");
-txt_id_label.setText(String.valueOf(id));
-txt_name.setText(String.valueOf(connect.rs.getString("first_name")));
-txt_lastname.setText(String.valueOf(connect.rs.getString("last_name")));
-txt_office.setText(String.valueOf(connect.rs.getString("office")));
+            connect.executeSQL("SELECT * FROM person WHERE id = '" + nome + "'");
+            connect.rs.first();
+            id = connect.rs.getInt("id");
+            txt_id_label.setText(String.valueOf(id));
+            txt_name.setText(String.valueOf(connect.rs.getString("firstName")));
+            txt_lastname.setText(String.valueOf(connect.rs.getString("lastName")));
+            txt_position.setText(String.valueOf(connect.rs.getString("position")));
+            txt_yearOfBirth.setText(String.valueOf(connect.rs.getString("yearOfBirth")));
+            txt_registrationTime.setText(String.valueOf(connect.rs.getString("registrationTime")));
 
 
         } catch (SQLException s) {
@@ -349,24 +363,20 @@ txt_office.setText(String.valueOf(connect.rs.getString("office")));
         }*/
     }//GEN-LAST:event_tableMouseReleased
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void sendMessage_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendMessage_btnActionPerformed
-               
-    }//GEN-LAST:event_sendMessage_btnActionPerformed
-
-    private void txt_officeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_officeActionPerformed
+    private void txt_positionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_positionActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txt_officeActionPerformed
+    }//GEN-LAST:event_txt_positionActionPerformed
 
     private void txt_searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_searchActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_searchActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+        
+        ModelPerson mod = new ModelPerson();
+        mod.setId(id);
+        controlPerson.delete(mod.getId());
+        
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -374,10 +384,23 @@ txt_office.setText(String.valueOf(connect.rs.getString("office")));
         mod.setId(id);
         mod.setFirstName(txt_name.getText());
         mod.setLastName(txt_lastname.getText());
-        //mod.setDob(txt_phone.getText());
-        mod.setPosition(txt_office.getText());
+        mod.setPosition(txt_position.getText());
+         mod.setYearOfBirth(txt_yearOfBirth.getText());
+         mod.setRegistrationTime(txt_registrationTime.getText());
         controlPerson.update(mod, id);
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void txt_nameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_nameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_nameActionPerformed
+
+    private void txt_yearOfBirthActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_yearOfBirthActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_yearOfBirthActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -398,38 +421,16 @@ txt_office.setText(String.valueOf(connect.rs.getString("office")));
                     Logger.getLogger(BDViewer.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-        });
-      /**java.awt.EventQueue.invokeLater(() -> {
-    JFrame mainFrame = new JFrame();
-    BDViewer dialog;
-          try {
-              dialog = new BDViewer(mainFrame, true);)}
-          } catch (SQLException ex) {
-              Logger.getLogger(BDViewer.class.getName()).log(Level.SEVERE, null, ex);
-          }
-    
-    dialog.addWindowListener(new WindowAdapter() {
-        @Override
-        public void windowClosing(WindowEvent e) {
-            System.exit(0);
-        }
-    });
-    
-    try {
-        dialog.setVisible(true);
-    } catch (Exception ex) {
-        ex.printStackTrace();
-    }
-});*/
-
+        });    
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel9;
@@ -437,13 +438,14 @@ txt_office.setText(String.valueOf(connect.rs.getString("office")));
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JButton sendMessage_btn;
     private javax.swing.JTable table;
     private javax.swing.JLabel txt_id_label;
     private javax.swing.JTextField txt_lastname;
     private javax.swing.JTextField txt_name;
-    private javax.swing.JTextField txt_office;
+    private javax.swing.JTextField txt_position;
+    private javax.swing.JTextField txt_registrationTime;
     private javax.swing.JTextField txt_search;
+    private javax.swing.JTextField txt_yearOfBirth;
     // End of variables declaration//GEN-END:variables
  private void paint_table() {
         jScrollPane1.getViewport().setBackground(Color.WHITE);

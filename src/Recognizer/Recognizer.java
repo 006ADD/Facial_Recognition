@@ -93,7 +93,7 @@ public class Recognizer extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 153, 80, 30));
+        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 140, 80, 30));
 
         label_name.setBackground(new java.awt.Color(92, 96, 209));
         label_name.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N

@@ -13,12 +13,13 @@ import java.time.LocalDateTime;
 public class ModelPerson {
     private int id;
     private String firstName, lastName, yearOfBirth, position,  image, date;
-    private LocalDateTime registrationTime;
+    private String registrationTime;
 
     public ModelPerson() {
     }
 
-    public ModelPerson(int id, String firstName, String lastName, String position, String yearOfBirth, LocalDateTime registrationTime) {
+    public ModelPerson(int id, String firstName, String lastName, 
+            String position, String yearOfBirth, String registrationTime) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -66,11 +67,11 @@ public class ModelPerson {
     public void setPosition(String position) {
         this.position = position;
     }
-    public LocalDateTime getRegistrationTime() {
+    public String getRegistrationTime() {
         return registrationTime;
     }
 
-    public void setRegistrationTime(LocalDateTime registrationTime) {
+    public void setRegistrationTime(String registrationTime) {
         this.registrationTime = registrationTime;
     }
 }

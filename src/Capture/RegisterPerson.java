@@ -140,9 +140,13 @@ public class RegisterPerson extends javax.swing.JFrame {
             // Преобразуем время регистрации в строку в нужном формате, например, для вывода на экран
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
             String formattedRegistrationTime = registrationTime.format(formatter);
-            System.out.println("Formatted Registration Time: " + formattedRegistrationTime);    
+            System.out.println("Formatted Registration Time: " + formattedRegistrationTime);
+            
+// Вызываем метод insert и передаем ему полученные данные
+            
         
-           new Capture(id, firtsName, lastName, position, yearOfBirth, registrationTime).setVisible(true);
+           new Capture(id, firtsName, lastName, position, yearOfBirth, formattedRegistrationTime).setVisible(true);
+         
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -198,20 +202,7 @@ public class RegisterPerson extends javax.swing.JFrame {
     private javax.swing.JTextField txt_position;
     private javax.swing.JFormattedTextField txt_yearOfBirth;
     // End of variables declaration//GEN-END:variables
-    
-    /**private void showIdUser(){  старый код
-        connect.conexao();
-        connect.executaSQL("SELECT * FROM person ORDER BY id DESC LIMIT");
-        try{
-            txt_id_label.setText(String.valueOf((char) connect.rs.getInt("id")));
-            int id = Integer.parseInt(txt_id_label.getText());
-            id++;
-            txt_id_label.setText(String.valueOf(id));
-            //connect.rs.first();
-        }catch(Exception e){
-            
-        }
-    }*/
+       
     
     private void showIdUser() {
         connect.connection();
@@ -219,7 +210,7 @@ public class RegisterPerson extends javax.swing.JFrame {
             try {
                 if (connect.rs.next()) {
                    int id = connect.rs.getInt("id") + 1;
-                    txt_id_label.setText("ID " + id);
+                    txt_id_label.setText("ID №" + id);
                     LocalDateTime registrationTime = LocalDateTime.now(); // Получаем текущее время
                     // Сохраняем время регистрации в базе данных
                     saveRegistrationTime(id, registrationTime);

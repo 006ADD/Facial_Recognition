@@ -51,7 +51,7 @@ public class Menu extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(84, 79, 231));
         jLabel2.setText("Выберите вариант");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 70, 180, 50));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 70, 230, 50));
 
         jButton4.setBackground(new java.awt.Color(28, 160, 211));
         jButton4.setText("Распознавать");
@@ -83,13 +83,13 @@ public class Menu extends javax.swing.JFrame {
         txt_title_menu.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jPanel1.add(txt_title_menu, new org.netbeans.lib.awtextra.AbsoluteConstraints(9, 30, 480, 30));
 
-        jButton1.setText("jButton1");
+        jButton1.setText("База данных");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 170, 190, 140));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 170, 190, 150));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 740, 460));
 

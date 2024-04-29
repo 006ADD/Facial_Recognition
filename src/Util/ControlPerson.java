@@ -4,11 +4,7 @@
  */
 package Util;
 
-//import com.kingaspx.util.ConnectBanco;
-//import com.kingaspx.util.Model;
-/**import java.awt.Component;
-import java.awt.Image;
-import java.io.File;*/
+
 import java.awt.Component;
 import java.awt.Image;
 import java.io.File;
@@ -28,29 +24,44 @@ import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableModel;
-/*import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JTable;
-import javax.swing.ListSelectionModel;
-import javax.swing.table.TableCellRenderer;
-import javax.swing.table.TableModel;*/
+
 
 public class ControlPerson {
     Connecor connect = new Connecor(); 
 
     public void insert(ModelPerson mod) {
     try {
+         // Подключаемся к базе данных
         connect.connection();
-        String date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date(System.currentTimeMillis()));
-        PreparedStatement pst = connect.conn.prepareStatement("INSERT INTO person (id, first_name, last_name, yearOfBirth, position, registrationTime ) VALUES (?, ?, ?, ?, ?, ?)");
+
+        // Получаем текущее время в формате "yyyy-MM-dd HH:mm:ss"
+        String registrationTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+
+        // Подготавливаем SQL-запрос для вставки данных
+        PreparedStatement pst = connect.conn.prepareStatement("INSERT INTO person (id, firstName, lastName, position, yearOfBirth, registrationTime) VALUES (?, ?, ?, ?, ?, ?)");
         pst.setInt(1, mod.getId());
         pst.setString(2, mod.getFirstName());
         pst.setString(3, mod.getLastName());
-        pst.setString(4, mod.getYearOfBirth());
+        pst.setString(4, mod.getPosition());
+        pst.setString(5, mod.getYearOfBirth());
+        pst.setString(6, mod.getRegistrationTime()); // Вставляем текущее время регистрации
+
+        // Выполняем запрос на вставку данных
+        pst.executeUpdate();
+        
+        // Выводим сообщение об успешной регистрации в консоль
+        System.out.println("Data for " + mod.getFirstName() + " registered successfully.");
+
+        // Отключаемся от базы данных
+        connect.disconnect();
+        /*connect.connection();
+        String date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date(System.currentTimeMillis()));
+        PreparedStatement pst = connect.conn.prepareStatement("INSERT INTO person (id, first_name, last_name, position, yearOfBirth, registrationTime ) VALUES (?, ?, ?, ?, ?, ?)");
+        pst.setInt(1, mod.getId());
+        pst.setString(2, mod.getFirstName());
+        pst.setString(3, mod.getYearOfBirth());
+
+        pst.setString(4, mod.getLastName());
        // pst.setInt(4, Integer.parseInt(mod.getYearOfBirth())); // Преобразуем строку в int
         pst.setString(5, mod.getPosition());
         pst.setString(6, date);
@@ -58,7 +69,7 @@ public class ControlPerson {
          
         pst.executeUpdate();
         System.out.println("Data from(a): " + mod.getFirstName() + " registered");
-        connect.disconnect();
+        connect.disconnect();*/
     } catch (SQLException ex) {
         System.out.println("Error: " + ex);
     }
@@ -86,16 +97,14 @@ public class ControlPerson {
    public void update(ModelPerson mod, int id) {
         connect.connection();
         try {
-            PreparedStatement pst = connect.conn.prepareStatement("UPDATE person SET first_name= ?, last_name= ?, yearOfBirth= ?, position= ?, WHERE id=?");
+            PreparedStatement pst = connect.conn.prepareStatement("UPDATE person SET firstName= ?, lastName= ?, position= ?, yearOfBirth= ?, registrationTime= ? WHERE id=?");
 
             //String formattedDateTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
             pst.setString(1, mod.getFirstName());
             pst.setString(2, mod.getLastName());
-            pst.setString(3, mod.getYearOfBirth());
-            pst.setString(4, mod.getPosition());
-//pst.setTimestamp(5, Timestamp.valueOf(formattedDateTime));
-            //pst.setString(6, setRegistrationTime(LocalDateTime.now()));
-            pst.setString(5, null);
+            pst.setString(3, mod.getPosition());
+            pst.setString(4, mod.getYearOfBirth());
+            pst.setString(5, mod.getRegistrationTime());
             pst.setInt(6, id);
             pst.execute();
         } catch (SQLException ex) {
@@ -114,7 +123,7 @@ public class ControlPerson {
         } 
     }
 
-    public void filltable(String SQL, JTable tabela) throws SQLException {
+    public void filltable(String SQL, JTable tabel) throws SQLException {
         String id = null;
 
         connect.connection();
@@ -127,9 +136,9 @@ public class ControlPerson {
                     list.add(new Object[]{
                         "",
                         connect.rs.getString("id"),
-                        connect.rs.getString("first_name"),
-                        connect.rs.getString("last_name"),
-                        connect.rs.getString("office"),
+                        connect.rs.getString("firstName"),
+                        connect.rs.getString("lastName"),
+                        connect.rs.getString("position"),
                          
                     });
                 } while (connect.rs.next());
@@ -145,15 +154,15 @@ public class ControlPerson {
             }
         }
 
-        Model modelo = new Model(list, columns);
-        tabela.setModel((TableModel) modelo);
-        tabela.getColumnModel().getColumn(0).setCellRenderer(new ControlPerson.ImageRenderer());
-        tabela.getColumnModel().getColumn(1).setMaxWidth(0);
-        tabela.getColumnModel().getColumn(1).setMinWidth(0);
-        tabela.getTableHeader().getColumnModel().getColumn(1).setMaxWidth(0);
-        tabela.getTableHeader().getColumnModel().getColumn(1).setMinWidth(0);
-        tabela.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-        tabela.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        Model model = new Model(list, columns);
+        tabel.setModel((TableModel) model);
+        tabel.getColumnModel().getColumn(0).setCellRenderer(new ControlPerson.ImageRenderer());
+        tabel.getColumnModel().getColumn(1).setMaxWidth(0);
+        tabel.getColumnModel().getColumn(1).setMinWidth(0);
+        tabel.getTableHeader().getColumnModel().getColumn(1).setMaxWidth(0);
+        tabel.getTableHeader().getColumnModel().getColumn(1).setMinWidth(0);
+        tabel.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        tabel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
 
     class ImageRenderer implements TableCellRenderer {

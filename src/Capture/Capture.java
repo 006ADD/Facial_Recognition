@@ -49,11 +49,11 @@ public class Capture extends javax.swing.JFrame {
     
     //Vars
     private String root;
-    private String firstNamePerson;
-    private String lastNamePerson; 
-    private String positionPerson; 
-    private String yearOfBirthPerson;
-    private LocalDateTime registrationTime;
+    private String firstName;
+    private String lastName; 
+    private String position; 
+    private String yearOfBirth;
+    private String registrationTime;
     private int numSamples = 25, sample=1, idPerson;
     
     
@@ -63,14 +63,15 @@ public class Capture extends javax.swing.JFrame {
     public Capture(){}
     
     
-    public Capture(int id, String firstName, String lastName, String position, String yearOfBirth, LocalDateTime registrationTime)  {
+    public Capture(int id, String firstName, String lastName, String position, String yearOfBirth,
+            String registrationTime)  {
         initComponents();
         
         this.idPerson = id;
-        this.firstNamePerson = firstName;
-        this.lastNamePerson = lastName;
-        this.positionPerson=position;
-        this.yearOfBirthPerson=yearOfBirth;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.position=position;
+        this.yearOfBirth=yearOfBirth;
         this.registrationTime = registrationTime;
         
         startCamera();
@@ -86,8 +87,8 @@ public class Capture extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        counterLabel = new javax.swing.JLabel();
         saveButton = new javax.swing.JButton();
+        counterLabel = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
 
         label_photo.setForeground(new java.awt.Color(240, 240, 240));
@@ -103,13 +104,19 @@ public class Capture extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(153, 153, 153));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Сделайте 25  снимков");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 330, 40));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 220, 40));
 
         jLabel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(200, 200, 200)));
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 330, 310));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 340, 310));
 
         jPanel2.setForeground(new java.awt.Color(151, 38, 229));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        saveButton.setBackground(new java.awt.Color(30, 179, 177));
+        saveButton.setText("Снимать");
+        saveButton.setContentAreaFilled(false);
+        saveButton.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jPanel2.add(saveButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 30, 100, 30));
 
         counterLabel.setBackground(new java.awt.Color(92, 96, 209));
         counterLabel.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
@@ -117,13 +124,9 @@ public class Capture extends javax.swing.JFrame {
         counterLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         counterLabel.setText("00");
         counterLabel.setOpaque(true);
-        jPanel2.add(counterLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 10, 80, 40));
+        jPanel2.add(counterLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 80, 40));
 
-        saveButton.setBackground(new java.awt.Color(30, 179, 177));
-        saveButton.setText("Снимать");
-        saveButton.setContentAreaFilled(false);
-        saveButton.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jPanel2.add(saveButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 60, 100, 30));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 390, 310, 80));
 
         jButton1.setBackground(new java.awt.Color(255, 0, 0));
         jButton1.setText("Закрыть");
@@ -132,22 +135,20 @@ public class Capture extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 80, 30));
-
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 400, 310, 100));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 10, 80, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 368, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 379, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 532, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 501, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
-        setSize(new java.awt.Dimension(384, 540));
+        setSize(new java.awt.Dimension(395, 509));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -291,11 +292,10 @@ public class Capture extends javax.swing.JFrame {
         ModelPerson mod = new ModelPerson();
 
         mod.setId(idPerson);
-        mod.setFirstName(firstNamePerson);
-        mod.setLastName(lastNamePerson);
-        mod.setYearOfBirth(yearOfBirthPerson);
-        mod.setPosition(positionPerson);
-        mod.setRegistrationTime(LocalDateTime.now()); // Получаем текущее время
+        mod.setFirstName(firstName);
+        mod.setLastName(lastName);
+        mod.setPosition(position);
+        mod.setYearOfBirth(yearOfBirth);       
         mod.setRegistrationTime(registrationTime); 
         cod.insert(mod);
     }
