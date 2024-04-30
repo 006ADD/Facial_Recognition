@@ -8,7 +8,7 @@ import java.time.format.DateTimeFormatter;
 
 public class RegisterPerson extends javax.swing.JFrame {
 
-    Connecor connect = new Connecor();
+    Connecor connector = new Connecor();
     ControlPerson cod;
     ModelPerson mod;
     public RegisterPerson() {
@@ -205,12 +205,12 @@ public class RegisterPerson extends javax.swing.JFrame {
        
     
     private void showIdUser() {
-        connect.connection();
-        connect.executeSQL("SELECT * FROM person ORDER BY id DESC LIMIT 1");
+        connector.connection();
+        connector.executeSQL("SELECT * FROM person ORDER BY id DESC LIMIT 1");
             try {
-                if (connect.rs.next()) {
-                   int id = connect.rs.getInt("id") + 1;
-                    txt_id_label.setText("ID №" + id);
+                if (connector.rs.next()) {
+                   int id = connector.rs.getInt("id") + 1;
+                    txt_id_label.setText("ID " + id);
                     LocalDateTime registrationTime = LocalDateTime.now(); // Получаем текущее время
                     // Сохраняем время регистрации в базе данных
                     saveRegistrationTime(id, registrationTime);

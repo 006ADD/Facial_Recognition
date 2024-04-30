@@ -62,7 +62,7 @@ public class Recognizer extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         label_photo = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        labelOffice = new javax.swing.JLabel();
+        label_position = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         label_name = new javax.swing.JLabel();
 
@@ -79,13 +79,13 @@ public class Recognizer extends javax.swing.JFrame {
 
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        labelOffice.setBackground(new java.awt.Color(92, 96, 209));
-        labelOffice.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        labelOffice.setForeground(new java.awt.Color(255, 255, 255));
-        labelOffice.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelOffice.setText("должность");
-        labelOffice.setOpaque(true);
-        jPanel2.add(labelOffice, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 290, 50));
+        label_position.setBackground(new java.awt.Color(92, 96, 209));
+        label_position.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        label_position.setForeground(new java.awt.Color(255, 255, 255));
+        label_position.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        label_position.setText("должность");
+        label_position.setOpaque(true);
+        jPanel2.add(label_position, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 290, 50));
 
         jButton1.setText("Закрыть");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -165,9 +165,9 @@ public class Recognizer extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JLabel labelOffice;
     private javax.swing.JLabel label_name;
     private javax.swing.JLabel label_photo;
+    private javax.swing.JLabel label_position;
     // End of variables declaration//GEN-END:variables
 
    class DaemonThread implements Runnable {
@@ -205,8 +205,8 @@ public class Recognizer extends javax.swing.JFrame {
                                 if (prediction == -1) {
                                     /**rectangle(cameraImage, dadosFace, new Scalar(0, 0, 255, 3), 3, 0, 0);
                                     idPerson = 0;*/
-                                    label_name.setText("Desconhecido");
-                                    labelOffice.setText("");
+                                    label_name.setText("Не нашли");
+                                    label_position.setText("");
                                     idPerson=0;
                                    
                                 } else {
@@ -248,9 +248,9 @@ public class Recognizer extends javax.swing.JFrame {
                    String SQL = "SELECT * FROM person WHERE id = " + String.valueOf(idPerson);
                    connect.executeSQL(SQL);
                    while(connect.rs.next()){
-                       label_name.setText(connect.rs.getString("first_name")); 
+                       label_name.setText(connect.rs.getString("firstName")); 
                                //+ " " + connect.rs.getString("last_name"));
-                       labelOffice.setText(connect.rs.getString("office"));
+                       label_position.setText(connect.rs.getString("position"));
                        
                        System.out.println("Person: "+ connect.rs.getString("id"));
                        
