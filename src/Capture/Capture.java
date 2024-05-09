@@ -1,8 +1,8 @@
 package Capture;
 
 import Util.Connecor;
-import Util.ControlPerson;
-import Util.ModelPerson;
+import DAO.ControlPersonDAO;
+import Entity.ModelPerson;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
@@ -288,7 +288,7 @@ public class Capture extends javax.swing.JFrame {
      * This method inserts the information into the database.
      */
     public void insertDatabase() {
-        ControlPerson cod = new ControlPerson();
+        ControlPersonDAO cod = new ControlPersonDAO();
         ModelPerson mod = new ModelPerson();
 
         mod.setId(idPerson);

@@ -2,9 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Util;
+package DAO;
 
 
+import Entity.ModelPerson;
+import Util.Connecor;
+import Util.Model;
 import java.awt.Component;
 import java.awt.Image;
 import java.io.File;
@@ -26,8 +29,8 @@ import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableModel;
 
 
-public class ControlPerson {
-    Connecor connect = new Connecor(); 
+public class ControlPersonDAO {
+    private Connecor connect = new Connecor(); 
 
     public void insert(ModelPerson mod) {
     try {
@@ -54,45 +57,11 @@ public class ControlPerson {
 
         // Отключаемся от базы данных
         connect.disconnect();
-        /*connect.connection();
-        String date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date(System.currentTimeMillis()));
-        PreparedStatement pst = connect.conn.prepareStatement("INSERT INTO person (id, first_name, last_name, position, yearOfBirth, registrationTime ) VALUES (?, ?, ?, ?, ?, ?)");
-        pst.setInt(1, mod.getId());
-        pst.setString(2, mod.getFirstName());
-        pst.setString(3, mod.getYearOfBirth());
-
-        pst.setString(4, mod.getLastName());
-       // pst.setInt(4, Integer.parseInt(mod.getYearOfBirth())); // Преобразуем строку в int
-        pst.setString(5, mod.getPosition());
-        pst.setString(6, date);
-        //pst.setTimestamp(6, new Timestamp(System.currentTimeMillis())); // Вставляем текущее время
-         
-        pst.executeUpdate();
-        System.out.println("Data from(a): " + mod.getFirstName() + " registered");
-        connect.disconnect();*/
+       
     } catch (SQLException ex) {
         System.out.println("Error: " + ex);
     }
 }
-    /*public void insert(ModelPerson mod) {
-        String date = new SimpleDateFormat("dd/MM/yyyy").format(new Date(System.currentTimeMillis()));
-       try {
-            connect.connection();
-            PreparedStatement pst = connect.conn.prepareStatement("INSERT INTO person (id, first_name, last_name, dob, office, registration_time) VALUES (?, ?, ?, ?, ?, ?)");
-           pst.setInt(1, mod.getId());
-            pst.setString(2, mod.getFirst_name());
-            pst.setString(3, mod.getLast_name());
-             pst.setString(4, mod.getOffice());
-            pst.setString(5, mod.getDob());
-            pst.setTimestamp(6, Timestamp.valueOf(mod.getRegistrationTime()));
-         
-            pst.executeUpdate();
-            System.out.println("Data from(a): " + mod.getFirst_name() + " registered");
-            connect.disconnect();
-        } catch (SQLException ex) {
-            System.out.println("Error: " + ex);
-        }
-    }*/
 
    public void update(ModelPerson mod, int id) {
         connect.connection();
@@ -156,7 +125,7 @@ public class ControlPerson {
 
         Model model = new Model(list, columns);
         tabel.setModel((TableModel) model);
-        tabel.getColumnModel().getColumn(0).setCellRenderer(new ControlPerson.ImageRenderer());
+        tabel.getColumnModel().getColumn(0).setCellRenderer(new ControlPersonDAO.ImageRenderer());
         tabel.getColumnModel().getColumn(1).setMaxWidth(0);
         tabel.getColumnModel().getColumn(1).setMinWidth(0);
         tabel.getTableHeader().getColumnModel().getColumn(1).setMaxWidth(0);

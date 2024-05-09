@@ -2,11 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package DeanOffice;
+package DAO;
 
 import Util.Connecor;
-import Util.ControlPerson;
-import Util.ModelPerson;
+import DAO.ControlPersonDAO;
+import Entity.ModelPerson;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.WindowAdapter;
@@ -21,20 +21,23 @@ import javax.swing.JFrame;
  *
  * @author User
  */
-public class BDViewer extends javax.swing.JDialog {
+public class Viewer extends javax.swing.JDialog {
     //private KGradientPanel kGradientPanel1;
 int id;
     Connecor connect = new Connecor();
-    ControlPerson controlPerson = new ControlPerson();
-
-   public BDViewer(java.awt.Frame parent, boolean modal) throws SQLException {
+    ControlPersonDAO controlPerson = new ControlPersonDAO();
+    
+    /*public Viewer(String user) {
+        initComponents();
+    }*/
+   public Viewer(java.awt.Frame parent, boolean modal) throws SQLException {
     super(parent, modal);
     initComponents(); // Вызов инициализации компонентов
     paint_table();
     controlPerson.filltable("SELECT * FROM person ORDER BY id", table);
 }
     
-    public BDViewer() throws SQLException{
+    public Viewer(String user) throws SQLException{
         initComponents();
         paint_table();
         controlPerson.filltable("SELECT * FROM person ORDER BY id", table);
@@ -267,7 +270,7 @@ int id;
         });
         jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 400, 110, 40));
 
-        jButton3.setText("сох2");
+        jButton3.setText("сохранить");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -325,9 +328,9 @@ int id;
 
     private void txt_searchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_searchKeyReleased
         try {
-            controlPerson.filltable("SELECT * FROM person WHERE first_name LIKE '%" + txt_search.getText() + "%' OR last_name LIKE '%" + txt_search.getText() + "%' OR office LIKE '%" + txt_search.getText() + "%' ORDER BY id", table);
+            controlPerson.filltable("SELECT * FROM person WHERE firstName LIKE '%" + txt_search.getText() + "%' OR lastName LIKE '%" + txt_search.getText() + "%' OR office LIKE '%" + txt_search.getText() + "%' ORDER BY id", table);
         } catch (SQLException ex) {
-            Logger.getLogger(BDViewer.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Viewer.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_txt_searchKeyReleased
 
@@ -409,7 +412,7 @@ int id;
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    BDViewer dialog = new BDViewer(new javax.swing.JFrame(), true);
+                    Viewer dialog = new Viewer(new javax.swing.JFrame(), true);
                     dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                         @Override
                         public void windowClosing(java.awt.event.WindowEvent e) {
@@ -418,7 +421,7 @@ int id;
                     });
                     dialog.setVisible(true);
                 } catch (SQLException ex) {
-                    Logger.getLogger(BDViewer.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(Viewer.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });    

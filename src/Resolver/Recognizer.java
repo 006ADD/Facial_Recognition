@@ -1,5 +1,5 @@
 
-package Recognizer;
+package Resolver;
 
 //import Capture.Capture;
 import Util.Connecor;
