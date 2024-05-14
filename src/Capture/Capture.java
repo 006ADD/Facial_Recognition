@@ -1,7 +1,7 @@
 package Capture;
 
 import Util.Connecor;
-import DAO.ControlPersonDAO;
+import DAO.PersonDAO;
 import Entity.ModelPerson;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -112,11 +112,18 @@ public class Capture extends javax.swing.JFrame {
         jPanel2.setForeground(new java.awt.Color(151, 38, 229));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        saveButton.setBackground(new java.awt.Color(30, 179, 177));
+        saveButton.setBackground(new java.awt.Color(92, 96, 209));
+        saveButton.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         saveButton.setText("Снимать");
+        saveButton.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         saveButton.setContentAreaFilled(false);
         saveButton.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jPanel2.add(saveButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 30, 100, 30));
+        saveButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveButtonActionPerformed(evt);
+            }
+        });
+        jPanel2.add(saveButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 20, 110, 40));
 
         counterLabel.setBackground(new java.awt.Color(92, 96, 209));
         counterLabel.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
@@ -128,14 +135,17 @@ public class Capture extends javax.swing.JFrame {
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 390, 310, 80));
 
-        jButton1.setBackground(new java.awt.Color(255, 0, 0));
+        jButton1.setBackground(new java.awt.Color(92, 96, 209));
+        jButton1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Закрыть");
+        jButton1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 10, 80, 30));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 20, 90, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -155,6 +165,10 @@ public class Capture extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         stopCamera();        // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_saveButtonActionPerformed
 
    
     public static void main(String args[]) {
@@ -288,7 +302,7 @@ public class Capture extends javax.swing.JFrame {
      * This method inserts the information into the database.
      */
     public void insertDatabase() {
-        ControlPersonDAO cod = new ControlPersonDAO();
+        PersonDAO cod = new PersonDAO();
         ModelPerson mod = new ModelPerson();
 
         mod.setId(idPerson);

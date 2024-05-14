@@ -4,13 +4,19 @@
  */
 package Main;
 
+//import Principal.*;
+import Resolver.EnterController;
+import Resolver.ViewerEnter;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 
 
-public class LoginMain extends javax.swing.JFrame {
+public class LoginEnterController extends javax.swing.JFrame {
 
-    public LoginMain() {
+    public LoginEnterController() {
         initComponents();
     }
 
@@ -30,6 +36,7 @@ public class LoginMain extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         txt_pass = new javax.swing.JPasswordField();
         jButton1 = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Security System - Login");
@@ -48,8 +55,8 @@ public class LoginMain extends javax.swing.JFrame {
         jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel3.setText("Login");
-        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 60, 70, 40));
+        jLabel3.setText("Введите логин");
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 190, 40));
 
         txt_pass.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(200, 200, 200)));
         jPanel2.add(txt_pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 390, -1));
@@ -65,7 +72,10 @@ public class LoginMain extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 250, 180, 50));
+        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 240, 180, 50));
+
+        jLabel4.setText("Сюда могут заходить только авторизованные люди!");
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 310, -1, -1));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 440, 350));
 
@@ -76,9 +86,14 @@ public class LoginMain extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String user = txt_user.getText();
         String password = txt_pass.getText();
-        if(password.equals("Security")|| password.equals("Admin")){//only pass
-            Menu menu = new Menu(user);//Intance form "Menu"
-            menu.setVisible(true);
+        if(password.equals("Security")| password.equals("Admin")){//only pass
+            ViewerEnter enterController = null;
+            try {
+                enterController = new ViewerEnter(user); //Intance form "Menu"
+            } catch (SQLException ex) {
+                Logger.getLogger(LoginEnterController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            enterController.setVisible(true);
             dispose();//Close actual window
         }else{
             JOptionPane.showMessageDialog(null, "Try again...");
@@ -102,21 +117,35 @@ public class LoginMain extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(LoginMain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginEnterController.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(LoginMain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginEnterController.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(LoginMain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginEnterController.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(LoginMain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginEnterController.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new LoginMain().setVisible(true);
+                new LoginEnterController().setVisible(true);
             }
         });
     }
@@ -126,6 +155,7 @@ public class LoginMain extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPasswordField txt_pass;
     private javax.swing.JTextField txt_user;

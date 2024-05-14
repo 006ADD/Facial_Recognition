@@ -29,7 +29,7 @@ import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableModel;
 
 
-public class ControlPersonDAO {
+public class PersonDAO {
     private Connecor connect = new Connecor(); 
 
     public void insert(ModelPerson mod) {
@@ -97,7 +97,8 @@ public class ControlPersonDAO {
 
         connect.connection();
         ArrayList list = new ArrayList();
-        String[] columns = new String[]{"", "ID", "Name", "Phone", "Function"};
+        String[] columns = new String[]{"Photo", "ID", "Name", "Phone", "Position","Time"};
+       // String[] columns = new String[]{"Photo" ,"ID", "Name", "LastName", "Position", "EnterTime"};
         connect.executeSQL(SQL);
         try {
             if (connect.rs.next()) { // Проверяем, есть ли строки в результате запроса
@@ -108,6 +109,7 @@ public class ControlPersonDAO {
                         connect.rs.getString("firstName"),
                         connect.rs.getString("lastName"),
                         connect.rs.getString("position"),
+                        connect.rs.getString("registrationTime")
                          
                     });
                 } while (connect.rs.next());
@@ -125,7 +127,7 @@ public class ControlPersonDAO {
 
         Model model = new Model(list, columns);
         tabel.setModel((TableModel) model);
-        tabel.getColumnModel().getColumn(0).setCellRenderer(new ControlPersonDAO.ImageRenderer());
+        tabel.getColumnModel().getColumn(0).setCellRenderer(new PersonDAO.ImageRenderer());
         tabel.getColumnModel().getColumn(1).setMaxWidth(0);
         tabel.getColumnModel().getColumn(1).setMinWidth(0);
         tabel.getTableHeader().getColumnModel().getColumn(1).setMaxWidth(0);

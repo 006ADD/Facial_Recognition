@@ -1,7 +1,7 @@
 package Capture;
 
 import Util.Connecor;
-import DAO.ControlPersonDAO;
+import DAO.PersonDAO;
 import Entity.ModelPerson;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -9,7 +9,7 @@ import java.time.format.DateTimeFormatter;
 public class RegisterPerson extends javax.swing.JFrame {
 
     Connecor connector = new Connecor();
-    ControlPersonDAO cod;
+    PersonDAO cod;
     ModelPerson mod;
     public RegisterPerson() {
         initComponents();
@@ -97,7 +97,7 @@ public class RegisterPerson extends javax.swing.JFrame {
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 430, 180));
 
-        jButton1.setBackground(new java.awt.Color(174, 90, 241));
+        jButton1.setBackground(new java.awt.Color(92, 96, 209));
         jButton1.setText("Сфотографировать");
         jButton1.setContentAreaFilled(false);
         jButton1.setOpaque(true);
@@ -106,7 +106,7 @@ public class RegisterPerson extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 290, 180, 50));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 290, 180, 50));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, -1, 360));
 

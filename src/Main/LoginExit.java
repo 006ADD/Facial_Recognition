@@ -56,6 +56,7 @@ public class LoginExit extends javax.swing.JFrame {
         jPanel2.add(txt_pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 390, -1));
 
         jButton1.setBackground(new java.awt.Color(35, 227, 35));
+        jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton1.setText("Enter");
         jButton1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jButton1.setBorderPainted(false);

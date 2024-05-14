@@ -69,10 +69,18 @@ CREATE TABLE Enter (
     person_id INT REFERENCES Person(id),
     enterdate VARCHAR(100)
 );
-CREATE TABLE Exit (
+CREATE TABLE ExitDB (
     id SERIAL PRIMARY KEY,
     person_id INT REFERENCES Person(id),
     exitdate VARCHAR(100)
 );
 
+
+CREATE TABLE Controller (
+    person_id INT REFERENCES Person(id),
+    enterdate VARCHAR(100),
+	exitdate VARCHAR(100)
+);
+
 */
+

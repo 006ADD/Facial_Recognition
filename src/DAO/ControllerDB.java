@@ -1,5 +1,6 @@
 package DAO;
 
+import Entity.ControllerModel;
 import Entity.Exit;
 import Util.Connecor;
 import Util.Model;
@@ -18,17 +19,31 @@ import javax.swing.ListSelectionModel;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableModel;
 
-public class ExitDAO {
+public class ControllerDB {
 
     private Connecor connect = new Connecor();
-    
-    public void insert(Exit exit) throws SQLException {
+
+    public void insertEnter(ControllerModel controllerModel) throws SQLException {
         connect.connection();
         try (PreparedStatement statement = connect.conn.
-                prepareStatement("INSERT INTO ExitDB ( person_id, exitdate) VALUES ( ?, ?)")) {
+                prepareStatement("INSERT INTO Controller ( person_id, enterdate) VALUES ( ?, ?)")) {
             //statement.setInt(1, exit.getId());
-            statement.setInt(1, exit.getPersonId());
-            statement.setString(2, exit.getExitDate());
+            statement.setInt(1, controllerModel.getPersonId());
+            statement.setString(2, controllerModel.getEnterDate());
+            statement.executeUpdate();
+            connect.disconnect();
+        } catch (SQLException ex) {
+            System.out.println("Error: " + ex);
+        }
+    }
+    
+    public void insertExit(ControllerModel controllerModel) throws SQLException {
+        connect.connection();
+        try (PreparedStatement statement = connect.conn.
+                prepareStatement("INSERT INTO Controller ( person_id, exitdate) VALUES ( ?, ?)")) {
+            //statement.setInt(1, exit.getId());
+            statement.setInt(1, controllerModel.getPersonId());
+            statement.setString(2, controllerModel.getExitDate());
             statement.executeUpdate();
             connect.disconnect();
         } catch (SQLException ex) {
@@ -38,14 +53,14 @@ public class ExitDAO {
 
     public ResultSet getAll() throws SQLException {
         connect.connection();
-        try (PreparedStatement statement = connect.conn.prepareStatement("SELECT * FROM ExitDB")) {
+        try (PreparedStatement statement = connect.conn.prepareStatement("SELECT * FROM Controller")) {
             return statement.executeQuery();
         }
     }
 
     public void delete(int id) throws SQLException {
         connect.connection();
-        try (PreparedStatement statement = connect.conn.prepareStatement("DELETE FROM ExitDB WHERE id = ?")) {
+        try (PreparedStatement statement = connect.conn.prepareStatement("DELETE FROM Controller WHERE id = ?")) {
             statement.setInt(1, id);
             statement.executeUpdate();
             connect.disconnect();
@@ -59,7 +74,7 @@ public class ExitDAO {
         connect.connection();
         ArrayList list = new ArrayList();
         //String[] columns = new String[]{"Photo" ,"ID", "Name", "LastName", "Position", "EnterTime"};
-        String[] columns = new String[]{"photo","person_id","exitDate"};
+        String[] columns = new String[]{"photo","person_id", "enterDate","exitDate"};
         connect.executeSQL(SQL);
         try {
             if (connect.rs.next()) { // Проверяем, есть ли строки в результате запроса
@@ -67,7 +82,8 @@ public class ExitDAO {
                     list.add(new Object[]{
                         "",
                         //connect.rs.getString("id"),
-                        connect.rs.getString("person_id"),                      
+                        connect.rs.getString("person_id"),
+                         connect.rs.getString("enterDate"),
                         connect.rs.getString("exitdate")
                     });
                 } while (connect.rs.next());
@@ -85,7 +101,7 @@ public class ExitDAO {
 
         Model model = new Model(list, columns);
         tabel.setModel((TableModel) model);
-        tabel.getColumnModel().getColumn(0).setCellRenderer(new ExitDAO.ImageRenderer());
+        tabel.getColumnModel().getColumn(0).setCellRenderer(new ControllerDB.ImageRenderer());
         tabel.getColumnModel().getColumn(1).setMaxWidth(10);
         tabel.getColumnModel().getColumn(1).setMinWidth(10);
         tabel.getTableHeader().getColumnModel().getColumn(1).setMaxWidth(70);

@@ -36,6 +36,5 @@ public class Exit{
 
     public void setExitDate(String exitDate) {
         this.exitDate = exitDate;
-    }
-    
+    }   
 }
